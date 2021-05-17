@@ -16,6 +16,8 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 # /home/aaryanred/Desktop/ws2/src/more_interfaces/CMakeLists.txt
 
+# include_directories(include)
+
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
@@ -31,12 +33,10 @@ set(msg_files
   "msg/NestedBook.msg"
 )
 # generate interfaces
-rosidl_generate_interfaces(${PROJECT_NAME}
-  ${msg_files}
-)
+rosidl_generate_interfaces(${PROJECT_NAME} ${msg_files})
 ament_export_dependencies(rosidl_default_runtime)
 # add excecutable files
-add_executable(publish_address_book src/publish_address_book.cpp)
+add_executable(publish_address_book src/publish_address_book.cpp src/userdefined_modbus_library.cpp)
 add_executable(subscribe_address_book src/subscriber_address_book.cpp)
 # target_link_libraries(subscribe_address_book PUBLIC PkgConfig::json PkgConfig::modbus)
 # target_link_libraries(publish_address_book PUBLIC PkgConfig::json PkgConfig::modbus)

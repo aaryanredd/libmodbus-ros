@@ -1,5 +1,6 @@
 #include <chrono>
 #include <memory>
+#include "userdefined_modbus_library.hpp"
 #include "std_msgs/msg/string.hpp"
 #include "rclcpp/rclcpp.hpp"                                                      // including necessary libraries
 // #include "more_interfaces/msg/address_book.hpp"                                   // including custom made message library
@@ -42,6 +43,9 @@ private:
 
 int main(int argc, char * argv[])
 {
+  vector<int>x={245,254,265};
+  modbus_implementation_class m("127.0.0.1", x,"TCP", 504);
+  m.read_modbus_fun();
   rclcpp::init(argc, argv);
   rclcpp::spin(std::make_shared<AddressBookPublisher>());                         // to keep publishing
   rclcpp::shutdown();   
